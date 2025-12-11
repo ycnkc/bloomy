@@ -43,44 +43,52 @@
             </div>
 
             <div class="color-section">
-    <p class="subtitle" style="margin-top: 20px;">Wrapping Paper Color</p>
-    <div class="color-palette">
-    <button class="color-btn" style="background-color: #FE6A86;" onclick="setWrapperColor('pink')"></button>
-    
-    <button class="color-btn" style="background-color: #D86AFE;" onclick="setWrapperColor('purple')"></button>
-    
-    <button class="color-btn" style="background-color: #6ABFFE;" onclick="setWrapperColor('blue')"></button>
-    
-    <button class="color-btn" style="background-color: #86FE6A;" onclick="setWrapperColor('green')"></button>
-</div>
-</div>
-
-            
+                <p class="subtitle" style="margin-top: 20px;">Wrapping Paper Color</p>
+                <div class="color-palette">
+                    <button class="color-btn" style="background-color: #FE6A86;" onclick="setWrapperColor('pink')"></button>
+                    <button class="color-btn" style="background-color: #D86AFE;" onclick="setWrapperColor('purple')"></button>
+                    <button class="color-btn" style="background-color: #6ABFFE;" onclick="setWrapperColor('blue')"></button>
+                    <button class="color-btn" style="background-color: #86FE6A;" onclick="setWrapperColor('green')"></button>
+                </div>
+            </div>
         </aside>
 
        <main class="canvas-container">
-    <div class="canvas-wrapper">
-        
-        <canvas id="canvas" width="600" height="600" 
-                ondragover="allowDrop(event)" 
-                ondrop="drop(event)"
-                oncontextmenu="return false;">
-        </canvas>
-        
-        <div class="controls">
-            <button class="btn-clear" onclick="clearCanvas()" data-tooltip="Clear the canvas">
-                <img src="images/bin.png" id="bin" alt="Clear"> 
-            </button>
-            <button class="btn-save" id="saveBtn" onclick="downloadCanvas()" data-tooltip="Save your bouquet">
-                <img src="images/folder.png" id="folder" alt="Save"> 
-            </button>
-        </div>
-        
-    </div>
-    <p class="hint">Drag and drop • Del to Delete</p>
-    </main>
+            <div class="canvas-wrapper">
+                
+                <canvas id="canvas" width="600" height="600" 
+                        ondragover="allowDrop(event)" 
+                        ondrop="drop(event)"
+                        oncontextmenu="return false;">
+                </canvas>
+                
+                <div class="controls">
+                    <button class="btn-note" onclick="openNoteModal()" data-tooltip="Add a note">
+                        <img src="images/note-card.png" id="note-icon" style="width: 35px;" alt="Note"> 
+                    </button>
+                    <button class="btn-clear" onclick="clearCanvas()" data-tooltip="Clear the canvas">
+                        <img src="images/bin.png" id="bin" alt="Clear"> 
+                    </button>
+                    <button class="btn-save" id="saveBtn" onclick="downloadCanvas()" data-tooltip="Save your bouquet">
+                        <img src="images/folder.png" id="folder" alt="Save"> 
+                    </button>
+                </div>
+                
+            </div>
+            <p class="hint">Drag and drop • Del to Delete</p>
+        </main>
     </div>
 
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <h2>Write a Note 💌</h2>
+            <textarea id="noteInput" placeholder="Type your message here..." maxlength="80"></textarea>
+            <div class="modal-buttons">
+                <button onclick="closeNoteModal()" class="cancel-btn">Cancel</button>
+                <button onclick="addNoteToCanvas()" class="add-btn">Add Note</button>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
     <script src="transition.js"></script>
 </body>
