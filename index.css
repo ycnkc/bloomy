@@ -221,7 +221,7 @@ canvas:active {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 2px solid #FFDCE0;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: transform 0.2s;

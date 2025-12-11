@@ -311,6 +311,10 @@ canvas.addEventListener('mousedown', (e) => {
     draw();
 });
 
+function downloadCanvas() {
+   // download 
+}
+
 canvas.addEventListener('mousemove', (e) => {
     const mouse = getMousePos(e);
     if (selectedFlowerIndex !== null) {
