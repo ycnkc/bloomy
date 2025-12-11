@@ -1,0 +1,154 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    opacity: 0; /* Başlangıçta sayfa görünmez olsun */
+    transition: opacity 0.5s ease-in-out; /* 0.5 saniyede yumuşakça değişsin */
+}
+
+/* JavaScript bu sınıfı ekleyince sayfa görünecek */
+body.fade-in {
+    opacity: 1;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    background: url("images/bg.png") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Pixelify Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-layout {
+    display: flex;
+    background: rgba(255, 243, 184, 0.71);
+    padding: 20px;
+    border-radius: 67px;
+    box-shadow: 0 10px 40px rgba(126, 87, 194, 0.2);
+    gap: 30px;
+    max-width: 900px;
+    width: 95%;
+}
+
+.sidebar {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.logo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+    color:#FE6A86; 
+    margin: 0;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #ff6d00;
+    font-size: 12px;
+    margin-top: -10px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 34.5px;
+    background: none;    
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.2s;
+    color: #444;
+    width: 50px;
+    color: #FE6A86;
+    font-family: "Pixelify Sans";
+}
+
+button:hover {
+    background: none;
+    transform: translateY(-3px);
+}
+
+#bin, #folder {
+    width: 64px;
+    height: 64px;
+}
+
+.controls {
+    margin-top: auto; 
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.canvas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+canvas {
+    background-color: #fffbeb; 
+    border: none;
+    border-radius: 45px;
+    cursor: grab;
+    image-rendering: pixelated; 
+}
+
+
+canvas:active {
+    cursor: grabbing;
+}
+
+.hint {
+    font-size: 12px;
+    color: #ff6d00;
+}
+
+
+.flower-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+
+.flower-item {
+    background: #fffbeb;
+    border: 2px solid #FFDCE0;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: grab;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+.flower-item:hover {
+    border-color: #FE6A86;
+    background: #fffbeb;
+    transform: scale(1.05);
+}
+
+.flower-item img {
+    width: 50px; 
+    height: 50px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    pointer-events: none; 
+}
+
+
+
