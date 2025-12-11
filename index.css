@@ -5,13 +5,6 @@
 body {
     opacity: 0; 
     transition: opacity 0.5s ease-in-out; 
-}
-
-body.fade-in {
-    opacity: 1;
-}
-
-body {
     margin: 0;
     height: 100vh;
     background: url("images/bg.png") no-repeat center center fixed;
@@ -22,15 +15,21 @@ body {
     justify-content: center;
 }
 
+body.fade-in {
+    opacity: 1;
+}
+
 .main-layout {
     display: flex;
     background: rgba(255, 243, 184, 0.71);
     padding: 20px;
+    padding-bottom: 15px;
     border-radius: 67px;
     box-shadow: 0 10px 40px rgba(126, 87, 194, 0.2);
     gap: 30px;
     max-width: 900px;
     width: 95%;
+    height: auto;
 }
 
 .sidebar {
@@ -45,74 +44,15 @@ body {
     font-size: 20px;
     color:#FE6A86; 
     margin: 0;
+    margin-top: 50px; 
     text-align: center;
 }
 
 .subtitle {
     text-align: center;
     color: #ff6d00;
-    font-size: 12px;
+    font-size: 15px;
     margin-top: -10px;
-}
-
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 34.5px;
-    background: none;    
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 600;
-    transition: 0.2s;
-    color: #444;
-    width: 50px;
-    color: #FE6A86;
-    font-family: "Pixelify Sans";
-}
-
-button:hover {
-    background: none;
-    transform: translateY(-3px);
-}
-
-#bin, #folder {
-    width: 64px;
-    height: 64px;
-}
-
-.controls {
-    margin-top: auto; 
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.canvas-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-canvas {
-    background-color: #fffbeb; 
-    border: none;
-    border-radius: 45px;
-    cursor: grab;
-    image-rendering: pixelated; 
-}
-
-
-canvas:active {
-    cursor: grabbing;
-}
-
-.hint {
-    font-size: 12px;
-    color: #ff6d00;
 }
 
 
@@ -149,5 +89,145 @@ canvas:active {
     pointer-events: none; 
 }
 
+.canvas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
 
+.canvas-wrapper {
+    position: relative; 
+    width: 600px;      
+    height: 600px;     
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+canvas {
+    background-color: #fffbeb; 
+    border: none;
+    border-radius: 45px;
+    cursor: grab;
+    image-rendering: pixelated; 
+    width: 100%;
+    height: 100%;
+}
+
+canvas:active {
+    cursor: grabbing;
+}
+
+.hint {
+    margin-top: 10px;   
+    margin-bottom: 0;    
+    width: 100%;
+    text-align: center;
+    font-size: 14px;        
+    color: #ff6d00;
+    font-family: 'Pixelify Sans', sans-serif;
+    opacity: 0.8;
+    letter-spacing: 0.5px;
+}
+
+.controls {
+    position: absolute; 
+    bottom: 20px;      
+    right: 25px;       
+    display: flex;
+    flex-direction: row;
+    gap: 15px;          
+    z-index: 10;        
+}
+
+.controls button {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controls button img {
+    width: 35px !important;  
+    height: auto !important;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.controls button:hover img {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+.controls button:active img {
+    transform: scale(0.9);
+}
+
+.controls button::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    
+    background-color: #FE6A86;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 14px;
+    white-space: nowrap;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+.controls button::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    border: 6px solid transparent;
+    border-top-color: #FE6A86;
+    margin-bottom: -10px;
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease-in-out;
+}
+
+.controls button:hover::after,
+.controls button:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.color-btn {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.color-btn:hover {
+    transform: scale(1.2);
+    border-color: #FE6A86;
+}
