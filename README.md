@@ -1,4 +1,4 @@
-# Bloomy 🌸
+# Bloomy🌸 - Pixel Art Bouquet Maker
 
 Bloomy is a cozy, web-based creative tool that allows users to design their own pixel art flower bouquets. 
 Inspired by the "cottagecore" aesthetic and retro digital art, this project aims to provide a relaxing experience for users to create and share digital gifts.
