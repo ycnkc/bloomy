@@ -230,7 +230,7 @@ class BouquetApp {
             this.handleInputStart(e.clientX, e.clientY);
         });
 
-        this.canvas.addEventListener('mousemove', (e) => {
+        window.addEventListener('mousemove', (e) => {
             this.handleInputMove(e.clientX, e.clientY);
         });
 
@@ -245,7 +245,7 @@ class BouquetApp {
         }, { passive: false });
 
         this.canvas.addEventListener('touchmove', (e) => {
-            if(e.cancelable) e.preventDefault(); 
+            if(e.cancelable) e.preventDefault();
             const touch = e.touches[0];
             this.handleInputMove(touch.clientX, touch.clientY);
         }, { passive: false });
@@ -261,9 +261,20 @@ class BouquetApp {
     }
 
     
-    handleInputStart(clientX, clientY) {
+    getScaledPos(clientX, clientY) {
         const rect = this.canvas.getBoundingClientRect();
-        const m = { x: clientX - rect.left, y: clientY - rect.top };
+        
+        const scaleX = this.canvas.width / rect.width;
+        const scaleY = this.canvas.height / rect.height;
+
+        return { 
+            x: (clientX - rect.left) * scaleX, 
+            y: (clientY - rect.top) * scaleY 
+        };
+    }
+
+    handleInputStart(clientX, clientY) {
+        const m = this.getScaledPos(clientX, clientY);
 
         if (this.isViewMode) {
             for (let i = this.items.length - 1; i >= 0; i--) {
@@ -297,8 +308,7 @@ class BouquetApp {
     }
 
     handleInputMove(clientX, clientY) {
-        const rect = this.canvas.getBoundingClientRect();
-        const m = { x: clientX - rect.left, y: clientY - rect.top };
+        const m = this.getScaledPos(clientX, clientY);
 
         if (this.isViewMode) {
             let hoveringNote = false;
