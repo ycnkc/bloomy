@@ -12,6 +12,7 @@ html, body {
     touch-action: none; 
 }
 
+
 body {
     opacity: 0; 
     transition: opacity 0.5s ease-in-out; 
@@ -435,7 +436,6 @@ body.view-mode .subtitle {
     body {
         padding: 10px;
         box-sizing: border-box;
-        background-attachment: scroll; 
         background-position: center center;
 
     }
