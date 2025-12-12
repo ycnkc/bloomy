@@ -50,6 +50,11 @@ body {
     margin: 0; 
 }
 
+.logo-font {
+    font-family: "Press Start 2P", cursive;
+    font-size: 35px;
+}
+
 .intro-container p {
     color: #FE6A86;
     font-family: "Pixelify Sans", sans-serif;
