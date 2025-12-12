@@ -7,7 +7,7 @@ const CONFIG = {
         shadow: 'rgba(0, 0, 0, 0.3)'
     },
     ui: {
-        btnSize: 20,
+        btnSize: 30,
         handleOffset: 25,
         rotateTriggerDist: 10,
         resizeTriggerDist: 15
@@ -463,6 +463,14 @@ class BouquetApp {
             return true; 
         }
 
+        //delete
+        if (mouse.x >= drawX + drawW - btn/2 && mouse.x <= drawX + drawW + btn/2 &&
+            mouse.y >= drawY - btn/2 && mouse.y <= drawY + btn/2) {
+            
+            this.deleteSelectedItem(); 
+            return true;
+        }
+
         return false;
     }
 
@@ -659,6 +667,12 @@ class BouquetApp {
         ctx.fillStyle = "#fff";
         ctx.fill();
         ctx.stroke();
+
+        // delete button
+        this.ctx.fillStyle = "#ff4757"; 
+        this.ctx.fillRect(x + w - btn/2, y - btn/2, btn, btn);
+        this.ctx.fillStyle = "#fff";
+        this.ctx.fillText("✕", x + w, y);
 
         // layer down
         this.drawUIButton(x - btn/2, y + h - btn/2, "▼");
