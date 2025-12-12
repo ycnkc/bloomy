@@ -15,12 +15,21 @@ const CONFIG = {
     paths: {
         flowers: {
             'allium': ['images/allium.png'],
+            'allium-white': ['images/allium-white.png'],
             'carnation': ['images/carnation.png'],
+            'carnation-red': ['images/carnation-red.png'],
             'daffodil': ['images/daffodil.png'],
+            'daffodil-pink': ['images/daffodil-pink.png'],
             'daisy': ['images/daisy.png'],
+            'daisy-pink': ['images/daisy-pink.png'],
             'mimosa': ['images/mimosa.png'],
+            'mimosa-red': ['images/mimosa-red.png'],
             'rose': ['images/rose.png'],
-            'tulip': ['images/tulip.png']
+            'rose-white': ['images/rose-white.png'],
+            'tulip': ['images/tulip.png'],
+            'tulip-yellow': ['images/tulip-yellow.png']
+
+
         },
         wrappers: ['pink', 'purple', 'blue', 'green'],
         note: {
