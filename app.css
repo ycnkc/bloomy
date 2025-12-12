@@ -564,8 +564,8 @@ body.view-mode .subtitle {
         flex-direction: column;
         align-items: center;
         
-        width: 80%;
-        height: 70vw;
+        width: 95%;
+        height: 80%;
         aspect-ratio: auto;
         max-width: 100%;
         
@@ -598,6 +598,7 @@ body.view-mode .subtitle {
     body.view-mode canvas {
         border-radius: 30px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        
         width: 90vw;
         max-width: 400px;
         height: auto;
