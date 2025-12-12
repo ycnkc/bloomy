@@ -554,21 +554,56 @@ body.view-mode .subtitle {
         width: 30px !important;
     }
 
-    body.view-mode #view-only-header {
-        top: 15px;
+   body.view-mode .main-layout {
+        justify-content: center;
+        padding-top: 20px; 
     }
-    body.view-mode .logo {
-        position: static; 
-        font-size: 2rem; 
-    }
-    body.view-mode .subtitle {
-        position: static;
-        font-size: 10px;
-        margin-top: 5px;
-    }
+
     body.view-mode .canvas-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        width: 100%;
+        height: auto;
+        aspect-ratio: auto;
+        max-width: 100%;
+        
+        border: none;
+        box-shadow: none;
+        background: transparent;
+        margin-top: 0;
+    }
+
+    /* Başlık Alanı */
+    body.view-mode #view-only-header {
+        position: static;       
+        margin-bottom: 25px;    
+        transform: none;        
+        width: 100%;
+        pointer-events: auto;  
+    }
+    
+    body.view-mode .logo {
+        position: static;       
+         font-size: 2.5rem;
+        margin-bottom: 5px;
+    }
+
+    body.view-mode .subtitle {
+        position: static;       
+        font-size: 14px;
+        padding: 5px 15px;
+    }
+
+    body.view-mode canvas {
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        
         width: 90vw;
-        height: 90vw;
+        max-width: 400px;
+        height: auto;
+        aspect-ratio: 1/1; 
     }
 }
 
