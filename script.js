@@ -227,9 +227,45 @@ class BouquetApp {
     bindEvents() {
         this.canvas.addEventListener('mousedown', (e) => {
             if (e.button !== 0) return;
-            const m = Utils.getMousePos(this.canvas, e);
+            this.handleInputStart(e.clientX, e.clientY);
+        });
 
-            if (this.isViewMode) {
+        this.canvas.addEventListener('mousemove', (e) => {
+            this.handleInputMove(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('mouseup', () => {
+            this.handleInputEnd();
+        });
+
+        this.canvas.addEventListener('touchstart', (e) => {
+            if(e.cancelable) e.preventDefault(); 
+            const touch = e.touches[0];
+            this.handleInputStart(touch.clientX, touch.clientY);
+        }, { passive: false });
+
+        this.canvas.addEventListener('touchmove', (e) => {
+            if(e.cancelable) e.preventDefault(); 
+            const touch = e.touches[0];
+            this.handleInputMove(touch.clientX, touch.clientY);
+        }, { passive: false });
+
+        window.addEventListener('touchend', () => {
+            this.handleInputEnd();
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (this.isViewMode) return;
+            if (e.key === 'Delete' || e.key === 'Backspace') this.deleteSelectedItem();
+        });
+    }
+
+    
+    handleInputStart(clientX, clientY) {
+        const rect = this.canvas.getBoundingClientRect();
+        const m = { x: clientX - rect.left, y: clientY - rect.top };
+
+        if (this.isViewMode) {
             for (let i = this.items.length - 1; i >= 0; i--) {
                 const item = this.items[i];
                 if (item.type === 'note') {
@@ -242,32 +278,32 @@ class BouquetApp {
                     if (m.x >= drawX && m.x <= drawX + drawW &&
                         m.y >= drawY && m.y <= drawY + drawH) {
                         if (this.isPixelVisible(item, m.x, m.y)) {
-                            item.isOpen = !item.isOpen; 
+                            item.isOpen = !item.isOpen;
                             this.draw();
                             return;
                         }
                     }
                 }
             }
-            return; 
+            return;
         }
-            
-            if (this.selectedIndex !== null) {
-                if (this.handleUIInteraction(m)) return;
-            }
 
-            this.handleSelection(m);
-            this.draw();
-        });
+        if (this.selectedIndex !== null) {
+            if (this.handleUIInteraction(m)) return;
+        }
 
-        this.canvas.addEventListener('mousemove', (e) => {
-            const m = Utils.getMousePos(this.canvas, e);
+        this.handleSelection(m);
+        this.draw();
+    }
 
-            if (this.isViewMode) {
+    handleInputMove(clientX, clientY) {
+        const rect = this.canvas.getBoundingClientRect();
+        const m = { x: clientX - rect.left, y: clientY - rect.top };
+
+        if (this.isViewMode) {
             let hoveringNote = false;
             for (let item of this.items) {
                 if (item.type === 'note') {
-                     const scale = item.isOpen ? 1.5 : 1;
                      if (m.x > item.x - 20 && m.x < item.x + item.width + 20 && 
                          m.y > item.y - 20 && m.y < item.y + item.height + 20) {
                          hoveringNote = true;
@@ -278,37 +314,30 @@ class BouquetApp {
             return;
         }
 
-            this.updateCursor(m);
+        this.updateCursor(m);
 
-            if (this.selectedIndex === null) return;
-            const item = this.items[this.selectedIndex];
+        if (this.selectedIndex === null) return;
+        const item = this.items[this.selectedIndex];
 
-            if (this.dragState.rotating) {
-                const cx = item.x + item.width / 2;
-                const cy = item.y + item.height / 2;
-                const rad = Math.atan2(m.y - cy, m.x - cx);
-                item.angle = rad * (180 / Math.PI) + 90;
-                this.draw();
-            } else if (this.dragState.resizing) {
-                item.width = Math.max(20, m.x - item.x);
-                item.height = Math.max(20, m.y - item.y);
-                this.draw();
-            } else if (this.dragState.active) {
-                item.x = m.x - this.dragState.startX;
-                item.y = m.y - this.dragState.startY;
-                this.draw();
-            }
-        });
+        if (this.dragState.rotating) {
+            const cx = item.x + item.width / 2;
+            const cy = item.y + item.height / 2;
+            const rad = Math.atan2(m.y - cy, m.x - cx);
+            item.angle = rad * (180 / Math.PI) + 90;
+            this.draw();
+        } else if (this.dragState.resizing) {
+            item.width = Math.max(20, m.x - item.x);
+            item.height = Math.max(20, m.y - item.y);
+            this.draw();
+        } else if (this.dragState.active) {
+            item.x = m.x - this.dragState.startX;
+            item.y = m.y - this.dragState.startY;
+            this.draw();
+        }
+    }
 
-        window.addEventListener('mouseup', () => {
-            this.dragState = { active: false, resizing: false, rotating: false, startX: 0, startY: 0 };
-        });
-
-        window.addEventListener('keydown', (e) => {
-            if (this.isViewMode) return;
-
-            if (e.key === 'Delete' || e.key === 'Backspace') this.deleteSelectedItem();
-        });
+    handleInputEnd() {
+        this.dragState = { active: false, resizing: false, rotating: false, startX: 0, startY: 0 };
     }
 
     handleUIInteraction(mouse) {

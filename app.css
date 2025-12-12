@@ -2,6 +2,16 @@
     box-sizing: border-box;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; 
+    position: fixed;  
+    touch-action: none; 
+}
+
 body {
     opacity: 0; 
     transition: opacity 0.5s ease-in-out; 
@@ -64,6 +74,8 @@ body.fade-in {
     max-height: 350px;
     overflow-y: auto;
     padding-right: 5px;
+    touch-action: pan-x;
+    
 }
 
 .flower-grid::-webkit-scrollbar {
