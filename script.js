@@ -77,6 +77,8 @@ class BouquetApp {
         this.items = []; 
         this.selectedIndex = null;
         this.currentWrapperColor = 'pink';
+
+        this.isViewMode = false;
         
         this.dragState = {
             active: false,
@@ -217,6 +219,29 @@ class BouquetApp {
         this.canvas.addEventListener('mousedown', (e) => {
             if (e.button !== 0) return;
             const m = Utils.getMousePos(this.canvas, e);
+
+            if (this.isViewMode) {
+            for (let i = this.items.length - 1; i >= 0; i--) {
+                const item = this.items[i];
+                if (item.type === 'note') {
+                    const scale = item.isOpen ? 1.5 : 1;
+                    const drawX = item.x - (item.width * (scale - 1)) / 2;
+                    const drawY = item.y - (item.height * (scale - 1)) / 2;
+                    const drawW = item.width * scale;
+                    const drawH = item.height * scale;
+
+                    if (m.x >= drawX && m.x <= drawX + drawW &&
+                        m.y >= drawY && m.y <= drawY + drawH) {
+                        if (this.isPixelVisible(item, m.x, m.y)) {
+                            item.isOpen = !item.isOpen; 
+                            this.draw();
+                            return;
+                        }
+                    }
+                }
+            }
+            return; 
+        }
             
             if (this.selectedIndex !== null) {
                 if (this.handleUIInteraction(m)) return;
@@ -228,6 +253,22 @@ class BouquetApp {
 
         this.canvas.addEventListener('mousemove', (e) => {
             const m = Utils.getMousePos(this.canvas, e);
+
+            if (this.isViewMode) {
+            let hoveringNote = false;
+            for (let item of this.items) {
+                if (item.type === 'note') {
+                     const scale = item.isOpen ? 1.5 : 1;
+                     if (m.x > item.x - 20 && m.x < item.x + item.width + 20 && 
+                         m.y > item.y - 20 && m.y < item.y + item.height + 20) {
+                         hoveringNote = true;
+                     }
+                }
+            }
+            this.canvas.style.cursor = hoveringNote ? "pointer" : "default";
+            return;
+        }
+
             this.updateCursor(m);
 
             if (this.selectedIndex === null) return;
@@ -255,6 +296,8 @@ class BouquetApp {
         });
 
         window.addEventListener('keydown', (e) => {
+            if (this.isViewMode) return;
+
             if (e.key === 'Delete' || e.key === 'Backspace') this.deleteSelectedItem();
         });
     }
@@ -409,10 +452,12 @@ class BouquetApp {
         });
 
         // 5th Selection UI
+        if (!this.isViewMode) {
         const selected = (this.selectedIndex !== null) ? this.items[this.selectedIndex] : null;
         if (selected && selected.isSelected) {
             this.drawSelectionUI(selected);
         }
+    }
     }
 
     drawItem(item) {
@@ -576,6 +621,9 @@ class BouquetApp {
 
                 if (state.items) this.items = state.items;
                 if (state.wrapper) this.currentWrapperColor = state.wrapper;
+
+                this.isViewMode = true;
+                document.body.classList.add('view-mode');
 
                 setTimeout(() => this.draw(), 500); 
 

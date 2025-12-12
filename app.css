@@ -342,3 +342,64 @@ canvas:active {
         bottom: 30px;
     }
 }
+
+#view-only-header {
+    display: none;
+}
+
+body.view-mode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fdf6f8;
+    margin: 0;
+    overflow: hidden;
+}
+
+body.view-mode .sidebar,
+body.view-mode .controls,
+body.view-mode .hint {
+    display: none !important;
+}
+
+body.view-mode .main-layout {
+    width: auto;
+    display: block;
+}
+
+body.view-mode .canvas-wrapper {
+    position: relative; 
+    border-radius: 12px;
+    overflow: hidden; 
+}
+
+body.view-mode #view-only-header {
+    display: block;
+    position: absolute;       
+    top: 25px;              
+    right: 10px;
+    z-index: 10;              
+    text-align: center;
+    width: 100%;
+    pointer-events: none; 
+}
+
+body.view-mode .logo {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20px;
+    color: #FE6A86;
+    margin: 0;
+
+}
+
+body.view-mode .subtitle {
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 14px;
+    color: #FE6A86;
+    margin-top: 5px;
+    font-weight: 800;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
