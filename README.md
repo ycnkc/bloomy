@@ -3,8 +3,7 @@
 **Bloomy** is a cozy, web-based creative tool that allows users to design their own pixel art flower bouquets.  
 Inspired by cottagecore aesthetics and retro digital art, this project aims to offer a relaxing and delightful way to create and share digital gifts.
 
-> **Status:** Work in Progress.
-> UI, asset set, and editor tools are still actively being developed.
+> UI, assets and features are being updated constantly.
 
 ---
 
@@ -15,9 +14,9 @@ Inspired by cottagecore aesthetics and retro digital art, this project aims to o
 
 ## Preview
 
-| Intro Page | Bouquet Editor Preview |
-|--------------------|------------------------|
-| ![Bloomy Intro](images/index-page.png) | ![Bloomy Editor](images/app-page.png) |
+| Intro Page | Bouquet Editor Preview | View Mode |
+|--------------------|------------------------|------------------------|
+| ![Bloomy Intro](images/index-page.png) | ![Bloomy Editor](images/app-page.png) | ![View Mode](images/view-mode.png)
 
 ---
 
@@ -29,11 +28,9 @@ Inspired by cottagecore aesthetics and retro digital art, this project aims to o
 
 ###  Canvas Rendering
 - Pixel-perfect rendering using the HTML5 Canvas API with **no blurring**.
-- Zoom in/out system currently in prototyping.
 
 ###  Bouquet Builder
 - Add, move, remove, and reorder bouquet elements.
-- Simple array-based state (may migrate to Zustand/Redux later).
 
 ###  Retro UI
 - Clean, minimal, retro-inspired interface  
