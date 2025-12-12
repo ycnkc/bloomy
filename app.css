@@ -419,7 +419,12 @@ body.view-mode .subtitle {
     body::-webkit-scrollbar {
         display: none; 
     }
-     
+
+    body {
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
     .main-layout {
         flex-direction: column-reverse; 
         width: 95%;

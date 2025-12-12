@@ -688,3 +688,77 @@ function drop(e) {
 function shareBouquet() {
     app.generateShareLink();
 }
+
+// mobile drag and drop
+function initMobileDragDrop() {
+    const flowerItems = document.querySelectorAll('.flower-item');
+    const canvas = document.getElementById('canvas');
+    let activeGhost = null;
+    let activeType = null;
+
+    flowerItems.forEach(item => {
+        item.addEventListener('touchstart', handleTouchStart, { passive: false });
+        item.addEventListener('touchmove', handleTouchMove, { passive: false });
+        item.addEventListener('touchend', handleTouchEnd);
+    });
+
+    function handleTouchStart(e) {
+        const dragAttr = this.getAttribute('ondragstart');
+        const match = dragAttr.match(/'([^']+)'/);
+        
+        if (match && match[1]) {
+            activeType = match[1];
+            
+            const img = this.querySelector('img');
+            activeGhost = img.cloneNode(true);
+            activeGhost.style.position = 'fixed';
+            activeGhost.style.width = '60px'; 
+            activeGhost.style.height = '60px';
+            activeGhost.style.opacity = '0.8';
+            activeGhost.style.pointerEvents = 'none'; 
+            activeGhost.style.zIndex = '9999';
+            activeGhost.style.transition = 'none';
+            
+            const touch = e.touches[0];
+            activeGhost.style.left = (touch.clientX - 30) + 'px';
+            activeGhost.style.top = (touch.clientY - 30) + 'px';
+            
+            document.body.appendChild(activeGhost);
+        }
+    }
+
+    function handleTouchMove(e) {
+        if (!activeGhost) return;
+        
+        const touch = e.touches[0];
+        const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+
+        if (targetElement === canvas || canvas.contains(targetElement)) {
+            e.preventDefault(); 
+        }
+
+        activeGhost.style.left = (touch.clientX - 30) + 'px';
+        activeGhost.style.top = (touch.clientY - 30) + 'px';
+    }
+
+    function handleTouchEnd(e) {
+        if (!activeGhost) return;
+
+        const touch = e.changedTouches[0];
+        const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+
+        if (dropTarget === canvas) {
+            const rect = canvas.getBoundingClientRect();
+            const x = touch.clientX - rect.left;
+            const y = touch.clientY - rect.top;
+
+            app.addItem(activeType, x, y);
+        }
+
+        if (activeGhost) activeGhost.remove();
+        activeGhost = null;
+        activeType = null;
+    }
+}
+
+initMobileDragDrop();
