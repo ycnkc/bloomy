@@ -414,3 +414,145 @@ body.view-mode .subtitle {
     padding: 5px 15px;
     border-radius: 20px;
 }
+
+@media screen and (max-width: 900px) {
+    body::-webkit-scrollbar {
+        display: none; 
+    }
+     
+    .main-layout {
+        flex-direction: column-reverse; 
+        width: 95%;
+        height: auto;
+        gap: 20px;
+        align-items: center;
+        
+        position: relative;
+        padding-top: 80px; 
+        padding-bottom: 20px;
+    }
+
+    .sidebar {
+        width: 100%;
+        gap: 10px;
+    }
+
+    .logo {
+        position: absolute;
+        top: 25px;         
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: 0;
+        z-index: 5;         
+        font-size: 24px;    
+    }
+
+    .subtitle {
+        position: absolute;
+        top: 55px;          
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: 0;
+        z-index: 5;
+        font-size: 12px;
+    }
+
+    .flower-grid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        max-height: auto;
+        padding-bottom: 10px;
+        gap: 15px;
+        width: 100%;
+        -webkit-overflow-scrolling: touch; 
+    }
+
+    .flower-grid::-webkit-scrollbar {
+        height: 4px;
+        background: transparent;
+    }
+    .flower-grid::-webkit-scrollbar-thumb {
+        background-color: #FE6A86;
+        border-radius: 10px;
+    }
+
+    .flower-item {
+        min-width: 60px;
+        height: 60px;
+        flex-shrink: 0; 
+    }
+
+    .color-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .color-section .subtitle {
+        position: static; 
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .canvas-container {
+        width: 100%;
+    }
+
+    .canvas-wrapper {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+    }
+
+    .controls {
+        right: 10px;
+        bottom: 10px;
+        gap: 8px;
+    }
+    
+    .controls button img {
+        width: 30px !important;
+    }
+
+    body.view-mode #view-only-header {
+        top: 15px;
+    }
+    body.view-mode .logo {
+        position: static; 
+        font-size: 2rem; 
+    }
+    body.view-mode .subtitle {
+        position: static;
+        font-size: 10px;
+        margin-top: 5px;
+    }
+    body.view-mode .canvas-wrapper {
+        width: 90vw;
+        height: 90vw;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    body::-webkit-scrollbar {
+        display: none; 
+    }
+
+    .main-layout {
+        padding-top: 70px; 
+    }
+    .logo {
+        top: 20px;
+        font-size: 20px;
+    }
+    .subtitle {
+        top: 45px;
+    }
+}
