@@ -224,7 +224,7 @@ class BouquetApp {
     }
 
     //events
-    bindEvents() {
+   bindEvents() {
         this.canvas.addEventListener('mousedown', (e) => {
             if (e.button !== 0) return;
             this.handleInputStart(e.clientX, e.clientY);
@@ -239,25 +239,84 @@ class BouquetApp {
         });
 
         this.canvas.addEventListener('touchstart', (e) => {
-            if(e.cancelable) e.preventDefault(); 
-            const touch = e.touches[0];
-            this.handleInputStart(touch.clientX, touch.clientY);
+            if (e.cancelable) e.preventDefault();
+            
+            if (e.touches.length === 2) {
+                this.handlePinchStart(e);
+            } 
+            else if (e.touches.length === 1) {
+                const touch = e.touches[0];
+                this.handleInputStart(touch.clientX, touch.clientY);
+            }
         }, { passive: false });
 
         this.canvas.addEventListener('touchmove', (e) => {
-            if(e.cancelable) e.preventDefault();
-            const touch = e.touches[0];
-            this.handleInputMove(touch.clientX, touch.clientY);
+            if (e.cancelable) e.preventDefault();
+
+            if (e.touches.length === 2) {
+                this.handlePinchMove(e);
+            } 
+            else if (e.touches.length === 1 && !this.pinchState?.active) {
+                const touch = e.touches[0];
+                this.handleInputMove(touch.clientX, touch.clientY);
+            }
         }, { passive: false });
 
-        window.addEventListener('touchend', () => {
+        window.addEventListener('touchend', (e) => {
             this.handleInputEnd();
+            if (e.touches.length < 2) {
+                this.pinchState = { active: false };
+            }
         });
 
         window.addEventListener('keydown', (e) => {
             if (this.isViewMode) return;
             if (e.key === 'Delete' || e.key === 'Backspace') this.deleteSelectedItem();
         });
+    }
+
+    
+    handlePinchStart(e) {
+        if (this.selectedIndex === null || this.isViewMode) return;
+
+        const t1 = e.touches[0];
+        const t2 = e.touches[1];
+
+        const dx = t2.clientX - t1.clientX;
+        const dy = t2.clientY - t1.clientY;
+        
+        this.pinchState = {
+            active: true,
+            startDist: Math.hypot(dx, dy), 
+            startAngle: Math.atan2(dy, dx), 
+            startWidth: this.items[this.selectedIndex].width,
+            startHeight: this.items[this.selectedIndex].height,
+            startItemAngle: this.items[this.selectedIndex].angle
+        };
+    }
+
+    handlePinchMove(e) {
+        if (!this.pinchState || !this.pinchState.active || this.selectedIndex === null) return;
+
+        const t1 = e.touches[0];
+        const t2 = e.touches[1];
+        const dx = t2.clientX - t1.clientX;
+        const dy = t2.clientY - t1.clientY;
+
+        
+        const currentDist = Math.hypot(dx, dy);
+        const scale = currentDist / this.pinchState.startDist;
+        const item = this.items[this.selectedIndex];
+
+        item.width = Math.max(20, this.pinchState.startWidth * scale);
+        item.height = Math.max(20, this.pinchState.startHeight * scale);
+
+        
+        const currentAngle = Math.atan2(dy, dx);
+        const angleDiff = (currentAngle - this.pinchState.startAngle) * (180 / Math.PI);
+        item.angle = this.pinchState.startItemAngle + angleDiff;
+
+        this.draw();
     }
 
     

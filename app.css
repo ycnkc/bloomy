@@ -435,7 +435,9 @@ body.view-mode .subtitle {
     body {
         padding: 10px;
         box-sizing: border-box;
-        
+        background-attachment: scroll; 
+        background-position: center center;
+
     }
 
     .main-layout {
