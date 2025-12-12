@@ -455,12 +455,12 @@ body.view-mode .subtitle {
     .main-layout {
         flex-direction: column-reverse; 
         width: 95%;
-        height: auto;
+        height: 80%;
         gap: 20px;
         align-items: center;
-        
+        justify-content: center;
         position: relative;
-        padding-top: 80px; 
+        padding-top: 50px; 
         padding-bottom: 20px;
     }
 
