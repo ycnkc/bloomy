@@ -554,57 +554,72 @@ body.view-mode .subtitle {
         width: 30px !important;
     }
 
-   body.view-mode .main-layout {
-        justify-content: center;
-        padding-top: 20px; 
-        padding-bottom: 20px;
-        
-    }
-
-    body.view-mode .canvas-wrapper {
-        display: flex;
+   body.view-mode {
+        overflow-y: auto !important;
+        height: auto !important;
+        min-height: 100dvh;
+        display: flex; 
         flex-direction: column;
         align-items: center;
+        justify-content: center; 
+        padding: 20px 0; 
+    }
+
+    body.view-mode .main-layout {
+        display: flex;
+        flex-direction: column; 
         
-        width: 95%;
-        height: 80%;
-        aspect-ratio: auto;
-        max-width: 100%;
+        width: 90%;         
+        max-width: 380px;   
         
-        border: none;
-        box-shadow: none;
-        background: transparent;
-        margin-top: 0;
+        height: auto !important;     
+        min-height: 0 !important;     
+        flex-grow: 0 !important;     
+        
+        margin: 0;          
+        padding: 30px 20px; 
+        padding-bottom: 30px; 
+        
+        background: rgba(255, 243, 184, 0.95); 
+        border-radius: 25px;
     }
 
     body.view-mode #view-only-header {
-        position: static;       
-        margin-bottom: 25px;    
-        transform: none;        
+        position: static;     
+        margin-bottom: 15px;  
+        margin-top: 0;
+        text-align: center;
         width: 100%;
-        pointer-events: auto;  
+    }
+
+    body.view-mode .logo {
+        position: static;
+        font-size: 24px;
+        display: block;
+        margin-bottom: 5px;
+        text-shadow: 2px 2px 0px #fff;
     }
     
-    body.view-mode .logo {
-        position: static;       
-         font-size: 2.5rem;
-        margin-bottom: 5px;
-    }
-
     body.view-mode .subtitle {
-        position: static;       
-        font-size: 14px;
-        padding: 5px 15px;
+        position: static;
+        display: inline-block;
+        font-size: 13px;
+        color: #ff6d00;
+        padding: 4px 12px;
     }
 
-    body.view-mode canvas {
+    body.view-mode .canvas-wrapper {
+        width: 100%;
+        aspect-ratio: 1 / 1; 
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        
-        width: 90vw;
-        max-width: 400px;
-        height: auto;
-        aspect-ratio: 1/1; 
+        background: #fff;
+        margin: 0;
+    }
+    
+    body.view-mode .sidebar,
+    body.view-mode .controls, 
+    body.view-mode .hint {
+        display: none !important;
     }
 }
 
