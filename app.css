@@ -455,7 +455,7 @@ body.view-mode .subtitle {
     .main-layout {
         flex-direction: column-reverse; 
         width: 95%;
-        height:95%;
+        height: 75%;
         gap: 20px;
         align-items: center;
         justify-content: center;
@@ -471,7 +471,7 @@ body.view-mode .subtitle {
 
     .logo {
         position: absolute;
-        top: 25px;         
+        top: 20px;         
         left: 0;
         right: 0;
         text-align: center;
@@ -482,7 +482,7 @@ body.view-mode .subtitle {
 
     .subtitle {
         position: absolute;
-        top: 55px;          
+        top: 50px;          
         left: 0;
         right: 0;
         text-align: center;
@@ -554,55 +554,53 @@ body.view-mode .subtitle {
         width: 30px !important;
     }
 
-   body.view-mode .main-layout {
-        justify-content: center;
-        padding-top: 20px; 
+    body.view-mode {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
     }
 
-    body.view-mode .canvas-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-        width: 95%;
-        height: 80%;
-        aspect-ratio: auto;
-        max-width: 100%;
-        
-        border: none;
-        box-shadow: none;
-        background: transparent;
-        margin-top: 0;
+    body.view-mode .main-layout {
+        height: 40% !important;      
+        width: 85% !important;    
+        margin: auto !important;   
+        padding: 30px 20px !important;
+        background: rgba(255, 243, 184, 0.71);
+        border-radius: 50px;
+        text-align: center; 
     }
 
     body.view-mode #view-only-header {
-        position: static;       
-        margin-bottom: 25px;    
-        transform: none;        
-        width: 100%;
-        pointer-events: auto;  
+        top: -20px;
+        display: flex;
+        flex-direction: column;
+
     }
-    
+
     body.view-mode .logo {
-        position: static;       
-         font-size: 2.5rem;
-        margin-bottom: 5px;
+        font-size: 20px !important;
+        margin-bottom: 5px !important;
     }
 
     body.view-mode .subtitle {
-        position: static;       
-        font-size: 14px;
-        padding: 5px 15px;
+        font-size: 12px !important;
     }
 
-    body.view-mode canvas {
-        border-radius: 30px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        
-        width: 90vw;
-        max-width: 400px;
-        height: auto;
-        aspect-ratio: 1/1; 
+    body.view-mode .canvas-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 1/1 !important;
+        margin: 0 auto !important; 
+        display: block; 
+    }
+
+    body.view-mode .sidebar,
+    body.view-mode .controls,
+    body.view-mode .hint,
+    body.view-mode .flower-grid, 
+    body.view-mode .color-section {
+    display: none !important;
     }
 }
 
