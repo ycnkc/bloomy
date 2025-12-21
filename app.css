@@ -455,7 +455,7 @@ body.view-mode .subtitle {
     .main-layout {
         flex-direction: column-reverse; 
         width: 95%;
-        height: auto;
+        height: 75%;
         gap: 20px;
         align-items: center;
         justify-content: center;
@@ -471,7 +471,7 @@ body.view-mode .subtitle {
 
     .logo {
         position: absolute;
-        top: 25px;         
+        top: 20px;         
         left: 0;
         right: 0;
         text-align: center;
@@ -482,7 +482,7 @@ body.view-mode .subtitle {
 
     .subtitle {
         position: absolute;
-        top: 55px;          
+        top: 50px;          
         left: 0;
         right: 0;
         text-align: center;
@@ -554,54 +554,36 @@ body.view-mode .subtitle {
         width: 30px !important;
     }
 
-
-
     body.view-mode {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        justify-content: center !important;
-        min-height: 100dvh !important;
-        
-        overflow-y: auto !important;
-        padding: 20px 0 !important;
     }
 
     body.view-mode .main-layout {
-        display: block !important; 
-        height: auto !important;   
-        flex: none !important;    
-        min-height: 0 !important;  
-        
+        height: 40% !important;      
         width: 85% !important;    
-        max-width: 350px !important;
-        
         margin: auto !important;   
         padding: 30px 20px !important;
-        
-        background: rgba(255, 243, 184, 0.95);
-        border-radius: 25px;
-        
+        background: rgba(255, 243, 184, 0.71);
+        border-radius: 50px;
         text-align: center; 
     }
 
     body.view-mode #view-only-header {
-        margin-bottom: 20px;
+        top: -20px;
+        display: flex;
+        flex-direction: column;
+
     }
 
     body.view-mode .logo {
-        position: static !important;
-        display: block !important;
-        font-size: 24px !important;
+        font-size: 20px !important;
         margin-bottom: 5px !important;
     }
 
     body.view-mode .subtitle {
-        position: static !important;
-        display: inline-block !important;
         font-size: 12px !important;
-        padding: 4px 15px;
-        border-radius: 20px;
     }
 
     body.view-mode .canvas-wrapper {
@@ -610,8 +592,6 @@ body.view-mode .subtitle {
         height: auto !important;
         aspect-ratio: 1/1 !important;
         margin: 0 auto !important; 
-        border-radius: 20px;
-        background: #fff;
         display: block; 
     }
 
